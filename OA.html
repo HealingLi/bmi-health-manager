@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>数据管理平台</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: '微软雅黑'; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 导航选项卡 */
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid #1890ff;
+            padding: 0 20px;
+        }
+        .tab-item {
+            padding: 12px 24px;
+            color: #666;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .tab-item.active {
+            color: #1890ff;
+            border-bottom: 3px solid #1890ff;
+        }
+
+        /* 主体内容布局 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            padding: 20px;
+        }
+
+        /* 数据源配置区域 */
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 16px 0;
+        }
+        .system-list {
+            list-style: none;
+            margin: 12px 0;
+        }
+        .system-list li {
+            padding: 8px;
+            background: #f5f5f5;
+            margin: 6px 0;
+            border-radius: 4px;
+        }
+
+        /* 规则配置区域 */
+        .filter-section {
+            margin: 16px 0;
+        }
+        .filter-group {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        .btn-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            padding: 8px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #1890ff;
+            color: white;
+        }
+
+        /* 数据预览表格 */
+        .data-preview {
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 执行日志区域 */
+        .execution-log {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        .log-item {
+            padding: 8px;
+            border-left: 3px solid #52c41a;
+            margin: 6px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航选项卡 -->
+        <nav class="nav-tabs">
+            <div class="tab-item active">数据源配置</div>
+            <div class="tab-item">API 模板</div>
+            <div class="tab-item">历史配置</div>
+        </nav>
+
+        <!-- 主体内容 -->
+        <div class="main-content">
+            <!-- 左侧配置区 -->
+            <div>
+                <h3 style="margin:16px 0">基建项目周报</h3>
+                <div class="upload-area">
+                    <p>拖拽文件至此处或点击上传</p>
+                    <ul class="system-list">
+                        <li>监理系统</li>
+                        <li>智慧系统</li>
+                    </ul>
+                    <small>支持Excel、CSV格式</small>
+                </div>
+
+                <div class="filter-section">
+                    <h4>规则配置</h4>
+                    <div class="filter-group">
+                        <div>基建项目过滤</div>
+                        <button>排除配网基建</button>
+                        <button>排除主网项目</button>
+                        <button>+添加条件</button>
+                    </div>
+                    <div class="filter-group">
+                        <div>人员筛选</div>
+                        <button>剔除实习生</button>
+                        <button>剔除资料员</button>
+                        <button>添加条件</button>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary">保存</button>
+                    <button class="btn btn-primary">执行</button>
+                </div>
+            </div>
+
+            <!-- 右侧预览区 -->
+            <div class="data-preview">
+                <h4>数据预览</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>项目名称</th>
+                            <th>监理人员</th>
+                            <th>风险等级</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>广州南沙变电站工程</td>
+                            <td>赵建国</td>
+                            <td>高风险</td>
+                        </tr>
+                        <tr>
+                            <td>堰阳供电所改项目</td>
+                            <td>林志明</td>
+                            <td>中风险</td>
+                        </tr>
+                        <tr>
+                            <td>广州东环路配电工程</td>
+                            <td>陈晓华</td>
+                            <td>低风险</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 执行日志 -->
+        <div class="execution-log">
+            <h4>执行日志</h4>
+            <div class="log-item">成功导入数据源：风险管控到位列表.xlsx 2025-02-25 22:35:12</div>
+            <div class="log-item">检测到签到位置偏差超过3公里 2025-02-25 22:34:58</div>
+            <div class="log-item">国产精品</div>
+        </div>
+    </div>
+</body>
+</html>
